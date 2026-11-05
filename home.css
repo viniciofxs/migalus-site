@@ -18,7 +18,13 @@
 
 * { box-sizing: border-box; }
 
-html { background: var(--bg); }
+/* Nada pode passar da largura da tela: no iPhone, qualquer sobra faz o Safari
+   afastar e aproximar a página sozinho. "clip" corta sem criar rolagem lateral. */
+html {
+  background: var(--bg);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
@@ -26,7 +32,7 @@ body {
   color: var(--text);
   font: 17px/1.6 var(--sans);
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -87,6 +93,7 @@ a { color: inherit; }
   gap: 8px;
   padding: 12px 0 56px;
   text-align: center;
+  overflow-x: clip; /* o brilho do círculo passa um pouco das bordas */
 }
 
 .bubble {
@@ -101,7 +108,7 @@ a { color: inherit; }
 .bubble::before {
   content: "";
   position: absolute;
-  inset: -18%;
+  inset: -8%;
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(92, 140, 250, 0.32), transparent 75%);
   animation: glow 8s ease-in-out infinite;
