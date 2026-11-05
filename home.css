@@ -1,0 +1,278 @@
+/* Página inicial do Migalus: mesmo visual da abertura do app (fundo escuro com luzes,
+   círculo de vidro, letras arredondadas, botão em degradê). Pensada primeiro para celular. */
+
+:root {
+  --bg: #0f111c;
+  --bg2: #191730;
+  --blue: #5c8cfa;
+  --purple: #8c66f2;
+  --violet: #9e5cf5;
+  --glow: #8ce0ff;
+  --lilac: #d19eff;
+  --calm: #4dc7ad;
+  --text: #f4f3fa;
+  --muted: rgba(244, 243, 250, 0.72);
+  --round: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font: 17px/1.6 var(--sans);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Manchas de luz que se movem devagar atrás de tudo. */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: drift 28s ease-in-out infinite alternate;
+}
+.aurora .a1 { width: 110vmax; height: 110vmax; left: -55vmax; top: -60vmax;
+  background: radial-gradient(closest-side, rgba(92, 140, 250, 0.38), transparent); }
+.aurora .a2 { width: 120vmax; height: 120vmax; right: -60vmax; bottom: -65vmax;
+  background: radial-gradient(closest-side, rgba(140, 102, 242, 0.36), transparent); animation-delay: -9s; }
+.aurora .a3 { width: 70vmax; height: 70vmax; left: -10vmax; bottom: -40vmax;
+  background: radial-gradient(closest-side, rgba(77, 199, 173, 0.12), transparent); animation-delay: -18s; }
+
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(12vmin, 9vmin); }
+}
+
+a { color: inherit; }
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Topo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0 8px;
+  font: 700 20px/1 var(--round);
+  text-decoration: none;
+}
+.brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  box-shadow: 0 4px 14px rgba(140, 102, 242, 0.4);
+}
+
+/* Primeira dobra: ilustração e texto (um embaixo do outro no celular). */
+.hero {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0 56px;
+  text-align: center;
+}
+
+.bubble {
+  position: relative;
+  width: min(84vw, 380px);
+  aspect-ratio: 1;
+  margin: 8px auto 0;
+  display: grid;
+  place-items: center;
+}
+/* Brilho em volta */
+.bubble::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(92, 140, 250, 0.32), transparent 75%);
+  animation: glow 8s ease-in-out infinite;
+}
+/* O círculo de vidro com a borda brilhante (o anel do ícone). */
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(92, 140, 250, 0.18) 50%, rgba(140, 102, 242, 0.22));
+  box-shadow: 0 0 22px rgba(140, 224, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.05);
+  animation: breathe 8s ease-in-out infinite;
+}
+.ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--glow), var(--blue) 35%, var(--purple) 70%, var(--lilac));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.bubble img {
+  position: relative;
+  width: 75%;
+  height: auto;
+  margin-top: 4%;
+  filter: drop-shadow(0 10px 22px rgba(140, 102, 242, 0.35));
+  animation: inhale 8s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes breathe { 0%, 100% { transform: scale(0.94); } 50% { transform: scale(1); } }
+@keyframes inhale  { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+@keyframes glow    { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+.copy { padding-top: 12px; }
+
+h1 {
+  margin: 0;
+  font: 800 clamp(52px, 15vw, 88px)/1 var(--round);
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #fff, #dcd1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.tagline {
+  margin: 10px 0 0;
+  font: 600 clamp(22px, 6vw, 30px)/1.25 var(--round);
+  color: var(--text);
+}
+.how {
+  margin: 22px auto 0;
+  max-width: 34ch;
+  color: var(--muted);
+}
+.how strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--text);
+  font: 700 19px/1.4 var(--round);
+}
+
+/* Botão principal: degradê do ícone, brilho e um reflexo que passa. */
+.cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  margin-top: 28px;
+  padding: 17px 28px;
+  border-radius: 999px;
+  overflow: hidden;
+  font: 700 18px/1 var(--round);
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(90deg, var(--blue), var(--purple), var(--violet));
+  box-shadow: 0 8px 26px rgba(140, 102, 242, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.cta::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  width: 35%;
+  left: -45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  animation: shine 3.5s ease-in-out infinite;
+}
+.cta[aria-disabled="true"] { cursor: default; }
+.cta svg { width: 20px; height: 20px; flex: none; }
+.cta-note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+@keyframes shine { 0% { left: -45%; } 26%, 100% { left: 120%; } }
+
+/* O que o Migalus faz */
+.features {
+  padding: 8px 0 64px;
+}
+.features h2 {
+  margin: 0 0 22px;
+  text-align: center;
+  font: 800 clamp(28px, 7vw, 38px)/1.15 var(--round);
+}
+.features ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 760px;
+  display: grid;
+  gap: 12px;
+}
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-weight: 500;
+}
+.features li svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  color: var(--blue);
+}
+
+footer {
+  padding: 28px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+}
+footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 22px;
+  margin-bottom: 10px;
+}
+footer a { text-decoration: none; color: var(--text); }
+footer a:hover { text-decoration: underline; }
+
+/* Computador: ilustração à esquerda, texto à direita. */
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 0 96px;
+    text-align: left;
+  }
+  .bubble { width: min(42vw, 440px); margin: 0 auto; }
+  .how { margin-left: 0; }
+  .features ul { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora span, .bubble::before, .ring, .bubble img, .cta::after { animation: none; }
+  .cta::after { display: none; }
+}
