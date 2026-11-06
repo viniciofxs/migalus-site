@@ -278,17 +278,41 @@ footer nav {
 footer a { text-decoration: none; color: var(--text); }
 footer a:hover { text-decoration: underline; }
 
-/* Computador: ilustração à esquerda, texto à direita. */
+/* Computador: ilustração à esquerda, texto à direita, a primeira tela ocupando a altura toda.
+   Tudo aqui vale só para telas largas: o celular não muda. */
 @media (min-width: 900px) {
+  .wrap { max-width: 1200px; padding: 0 32px; }
+
   .hero {
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 48px;
-    padding: 48px 0 96px;
+    align-content: center;
+    gap: 64px;
+    min-height: calc(100svh - 76px); /* tela cheia, menos o topo com o nome */
+    padding: 24px 0 56px;
     text-align: left;
   }
-  .bubble { width: min(42vw, 440px); margin: 0 auto; }
-  .how { margin-left: 0; }
+  .bubble { width: min(40vw, 480px); margin: 0 auto; }
+
+  h1 { font-size: clamp(88px, 8vw, 112px); }
+  .tagline { font-size: 34px; margin-top: 14px; }
+  .how { margin: 28px 0 0; max-width: 44ch; font-size: 20px; line-height: 1.6; }
+  .how strong { font-size: 22px; margin-top: 14px; }
+  .cta { width: auto; min-width: 340px; margin-top: 34px; padding: 20px 40px; font-size: 19px; }
+  .cta-note { font-size: 15px; }
+
+  /* Lista em duas colunas, mais larga e com a letra um pouco maior. */
+  .features { padding: 40px 0 96px; }
+  .features h2 { margin-bottom: 32px; }
+  .features ul {
+    max-width: 920px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 56px;
+  }
+  .features li { font-size: 18px; padding-top: 16px; padding-bottom: 16px; }
+  /* Sem linha embaixo dos itens da última fileira (de cada coluna). */
+  .features li:nth-last-child(-n+2) { border-bottom: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
