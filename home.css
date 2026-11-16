@@ -278,6 +278,26 @@ footer nav {
 footer a { text-decoration: none; color: var(--text); }
 footer a:hover { text-decoration: underline; }
 
+/* Redes sociais: ícones pequenos e discretos, sem as cores das marcas. */
+footer .social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+footer .social a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.06);
+  transition: color 0.2s, background 0.2s;
+}
+footer .social a:hover { color: var(--text); background: rgba(255, 255, 255, 0.12); }
+footer .social svg { width: 20px; height: 20px; }
+
 /* Computador: ilustração à esquerda, texto à direita, a primeira tela ocupando a altura toda.
    Tudo aqui vale só para telas largas: o celular não muda. */
 @media (min-width: 900px) {
