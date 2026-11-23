@@ -215,6 +215,16 @@ h1 {
   animation: shine 3.5s ease-in-out infinite;
 }
 .cta[aria-disabled="true"] { cursor: default; }
+/* Selo oficial "Baixar na App Store" (não alterar cores nem formato do selo). */
+.store-badge {
+  display: inline-block;
+  margin-top: 28px;
+  line-height: 0;
+  border-radius: 12px;
+  transition: transform 0.15s ease;
+}
+.store-badge:active { transform: scale(0.97); }
+.store-badge img { width: 180px; height: auto; }
 .cta svg { width: 20px; height: 20px; flex: none; }
 .cta-note {
   margin: 12px 0 0;
